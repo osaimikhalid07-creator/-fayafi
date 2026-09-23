@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فيافي | مياه شرب معبأة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kraft: #F7FCFD;
+    --kraft-dark: #EAF7FB;
+    --kraft-deep: #087EA4;
+    --ink: #12343B;
+    --cream: #EAF7FB;
+    --terracotta: #087EA4;
+    --terracotta-2: #45C9E8;
+    --cyan: #45C9E8;
+    --mint: #6FCF97;
+    --gold: #D9B86C;
+    font-size:16px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  html,body{ height:100%; }
+  body{
+    background: var(--kraft);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.10), transparent 45%),
+      radial-gradient(ellipse at 90% 80%, rgba(0,0,0,.08), transparent 50%);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .display{ font-family:'Lalezar', 'IBM Plex Sans Arabic', sans-serif; }
+
+  /* decorative triangle-dot band, like the box border */
+  .band{
+    height:22px; width:100%;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='22'%3E%3Cpath d='M0 2 L20 20 L40 2' fill='none' stroke='%2312343B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='5.5' r='2' fill='%2312343B'/%3E%3C/svg%3E");
+    background-repeat:repeat-x; background-size:40px 22px;
+    opacity:.85;
+  }
+  .band.flip{ transform:scaleY(-1); }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; top:env(safe-area-inset-top,0px); z-index:50;
+    background: color-mix(in srgb, var(--kraft) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--ink);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:80px;}
+  .brand{ display:flex; align-items:baseline; gap:8px;}
+  .brand .ar{ font-family:'Lalezar', sans-serif; font-size:1.9rem; color:var(--ink); letter-spacing:1px;}
+  .brand .en{ font-size:.72rem; letter-spacing:3px; color: var(--terracotta); font-weight:600;}
+  .navlinks{ display:flex; gap:28px; font-size:.95rem; font-weight:500;}
+  .navlinks a{ text-decoration:none; border-bottom:2px solid transparent; padding-bottom:3px; transition:border-color .2s;}
+  .navlinks a:hover{ border-color: var(--cyan); }
+  .navcta{
+    background: var(--terracotta); color:#fff; padding:11px 24px; border-radius:999px;
+    font-weight:700; text-decoration:none; font-size:.92rem; border:none;
+    box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--terracotta) 45%, transparent);
+  }
+  @media (max-width:780px){ .navlinks{display:none;} }
+
+  /* HERO — crate label look */
+  .hero{ padding: 46px 0 0; }
+  .label-card{
+    background: linear-gradient(180deg, var(--kraft) 0%, var(--kraft-dark) 100%);
+    border: 2px solid var(--terracotta);
+    border-radius: 14px;
+    margin: 30px auto 0;
+    max-width: 1080px;
+    position:relative;
+    overflow:hidden;
+  }
+  .label-inner{ padding: 8px 34px 40px; }
+  .hero-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:34px; align-items:center; padding-top:20px;}
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; text-align:center;} }
+  .wordmark{ text-align:center; padding: 10px 0 6px;}
+  .wordmark .ar{ font-family:'Lalezar', sans-serif; font-size: clamp(3.4rem,8vw,5.2rem); line-height:1; color:var(--ink);}
+  .wordmark .en{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600; font-size:1.5rem; letter-spacing:2px; color: var(--gold); margin-top:2px;}
+  .wordmark .tagline{ margin-top:10px; font-size:1rem; color: var(--ink); font-weight:500;}
+  .wordmark .tagline-en{ font-size:.75rem; letter-spacing:2px; color: color-mix(in srgb, var(--ink) 65%, transparent); margin-top:2px;}
+
+  .hero-copy p.lead{ font-size:1.15rem; color: color-mix(in srgb, var(--ink) 85%, transparent); max-width:46ch; margin-top:6px;}
+  .cta-row{ margin-top:26px; display:flex; gap:14px; flex-wrap:wrap;}
+  @media (max-width:860px){ .cta-row{ justify-content:center;} }
+  .btn-stamp{
+    background: linear-gradient(135deg, var(--terracotta), var(--cyan)); color:#fff; padding:16px 32px; border-radius:999px;
+    font-weight:700; text-decoration:none; border:none; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--terracotta) 45%, transparent);
+    transition: transform .15s, box-shadow .15s; display:inline-block;
+  }
+  .btn-stamp:hover{ transform:translate(-2px,-2px); box-shadow: 0 14px 30px -8px color-mix(in srgb, var(--terracotta) 55%, transparent);}
+  .btn-outline{
+    border:2px solid var(--terracotta); color:var(--terracotta); padding:14px 30px; border-radius:999px; font-weight:700; text-decoration:none;
+  }
+
+  .building-art{ width:100%; }
+
+  .badge-demo{
+    display:inline-block; margin-top:18px; font-size:.8rem; background: color-mix(in srgb, var(--ink) 8%, transparent);
+    padding:6px 14px; border-radius:999px; border:1px dashed var(--ink);
+  }
+
+  /* TRUST STRIP */
+  .trust{ background: var(--ink); color: var(--cream); padding: 26px 0;}
+  .trust .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px; font-size:.95rem; font-weight:500;}
+  .trust .item{ display:flex; align-items:center; gap:10px;}
+  .trust .item .ico{ font-size:1.3rem; }
+
+  /* SECTIONS */
+  section{ padding: 86px 0; }
+  .sec-head{ max-width:640px; margin-bottom:46px;}
+  .sec-head .eyebrow{ font-family:'Lalezar',sans-serif; font-size:1.1rem; color:var(--terracotta);}
+  .sec-head h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); color:var(--ink); font-weight:700; margin-top:6px;}
+  .sec-head p{ margin-top:14px; color: color-mix(in srgb, var(--ink) 78%, transparent); font-size:1.05rem;}
+
+  .heritage{ background: var(--cream); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); }
+  .heritage .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:50px; align-items:center;}
+  @media (max-width:860px){ .heritage .wrap{ grid-template-columns:1fr;} }
+  .heritage p{ color: color-mix(in srgb, var(--ink) 82%, transparent); font-size:1.05rem; margin-top:16px;}
+  .heritage h2{ font-size:clamp(1.8rem,3.4vw,2.4rem); color:var(--ink);}
+
+  /* PRODUCTS */
+  .products{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .products{ grid-template-columns:1fr;} }
+  .pcard{
+    background: var(--cream); border:2px solid color-mix(in srgb, var(--terracotta) 30%, transparent); border-radius:16px; padding:30px 26px;
+    position:relative;
+  }
+  .pcard .size{ font-family:'Lalezar',sans-serif; font-size:2.3rem; color:var(--terracotta);}
+  .pcard .name{ font-weight:700; font-size:1.1rem; margin-top:4px;}
+  .pcard .desc{ color: color-mix(in srgb, var(--ink) 75%, transparent); margin-top:10px; font-size:.95rem;}
+  .pcard .price{ margin-top:20px; font-weight:700; font-size:1.25rem;}
+  .pcard .tag{
+    position:absolute; top:-12px; left:20px; background:var(--gold); color:var(--ink);
+    font-size:.75rem; padding:5px 12px; border-radius:999px; border:2px solid var(--ink); font-weight:700;
+  }
+
+  /* HOW */
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  @media (max-width:860px){ .steps{ grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{ grid-template-columns:1fr;} }
+  .step .n{ font-family:'Lalezar',sans-serif; font-size:1.6rem; color:var(--cyan);}
+  .step h3{ font-weight:700; margin:8px 0 6px; font-size:1.08rem;}
+  .step p{ color: color-mix(in srgb, var(--ink) 75%, transparent); font-size:.95rem;}
+
+  /* TESTIMONIALS */
+  .testi-wrap{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .testi-wrap{ grid-template-columns:1fr;} }
+  .testi{ background:var(--cream); border:2px dashed var(--mint); border-radius:10px; padding:26px 24px;}
+  .testi p.quote{ font-size:1rem; color:var(--ink);}
+  .testi .who{ margin-top:16px; font-weight:700; font-size:.9rem; color:var(--mint);}
+
+  /* CONTACT — shipping label style */
+  .contact-box{
+    background: var(--ink); color: var(--cream); border-radius:8px; padding:54px 46px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+    border: 2px solid var(--cyan);
+  }
+  @media (max-width:860px){ .contact-box{ grid-template-columns:1fr; padding:40px 24px;} }
+  .contact-box h2{ font-family:'Lalezar',sans-serif; font-size:clamp(1.9rem,3.4vw,2.6rem);}
+  .contact-box p{ color: color-mix(in srgb, var(--cream) 75%, transparent); margin-top:12px;}
+  .contact-list{ display:flex; flex-direction:column; gap:14px;}
+  .contact-row{
+    display:flex; align-items:center; gap:14px; background: color-mix(in srgb, var(--cream) 8%, transparent);
+    padding:15px 18px; border-radius:6px; text-decoration:none; color:var(--cream);
+    border:1px solid color-mix(in srgb, var(--cream) 25%, transparent);
+  }
+  .contact-row .ico{ width:36px; height:36px; border-radius:50%; background:var(--terracotta); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .contact-row .lbl{ font-size:.78rem; color: color-mix(in srgb, var(--cream) 65%, transparent);}
+  .contact-row .val{ font-weight:700; font-size:1rem;}
+
+  /* FEATURES / VMV / SECTORS */
+  .feat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:860px){ .feat-grid{ grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .feat-grid{ grid-template-columns:1fr;} }
+  .feat-card{ background:var(--cream); border:2px solid color-mix(in srgb, var(--terracotta) 25%, transparent); border-radius:16px; padding:28px 22px;}
+  .feat-card .ico{ font-size:1.8rem;}
+  .feat-card h3{ font-size:1.05rem; font-weight:700; margin:12px 0 8px;}
+  .feat-card p{ color: color-mix(in srgb, var(--ink) 75%, transparent); font-size:.92rem;}
+
+  .vmv-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-bottom:26px;}
+  @media (max-width:760px){ .vmv-grid{ grid-template-columns:1fr;} }
+  .vmv-card{ background:var(--cream); border-radius:16px; padding:30px 26px; border-inline-start:5px solid var(--terracotta);}
+  .vmv-card h3{ font-family:'Lalezar',sans-serif; font-size:1.3rem; color:var(--terracotta); margin-bottom:10px;}
+  .vmv-card p{ color: color-mix(in srgb, var(--ink) 82%, transparent); font-size:.98rem;}
+  .pill-row{ display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{ background:var(--terracotta); color:#fff; font-size:.88rem; font-weight:600; padding:9px 18px; border-radius:999px;}
+  .pill.alt{ background:var(--mint); color:var(--ink);}
+
+  .sector-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .sector-pill{ background:#fff; border:1.5px solid color-mix(in srgb, var(--terracotta) 40%, transparent); color:var(--ink); font-size:.9rem; font-weight:600; padding:9px 18px; border-radius:999px;}
+
+  .cta-banner{
+    background: linear-gradient(135deg, var(--terracotta), var(--cyan)); color:#fff; border-radius:20px;
+    padding:44px 40px; text-align:center; margin-bottom: 0;
+  }
+  .cta-banner h3{ font-size:clamp(1.4rem,2.6vw,1.9rem); font-weight:700;}
+  .cta-banner p{ margin-top:10px; color: color-mix(in srgb, #fff 85%, transparent); max-width:56ch; margin-inline:auto;}
+  .cta-banner a{ display:inline-block; margin-top:22px; background:#fff; color:var(--terracotta); font-weight:700; padding:14px 30px; border-radius:999px; text-decoration:none;}
+
+  footer{ padding:36px 0; text-align:center; font-size:.85rem; color: color-mix(in srgb, var(--ink) 70%, transparent);}
+  ::selection{ background: var(--terracotta); color:var(--cream);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="ar">فيافي</span><span class="en">FAYAFI</span></div>
+    <div class="navlinks">
+      <a href="#products">المنتجات</a>
+      <a href="#heritage">قصتنا</a>
+      <a href="#how">كيف تطلب</a>
+      <a href="#contact">تواصل معنا</a>
+    </div>
+    <a href="#contact" class="navcta">اطلب الآن</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="label-card">
+        <div class="band"></div>
+        <div class="label-inner">
+          <div class="wordmark">
+            <div class="ar">فيافي</div>
+            <div class="en">FAYAFI</div>
+            <div class="tagline">مياه شرب معبأة</div>
+            <div class="tagline-en">BOTTLED DRINKING WATER</div>
+            <div class="tagline" style="margin-top:8px; font-size:.9rem; color:var(--terracotta); font-weight:600;">نقاء من الطبيعة · جودة تثق بها</div>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="lead">فيافي علامة وطنية متخصصة في إنتاج وتعبئة مياه الشرب وفق أعلى معايير الجودة والسلامة الغذائية، مستوحاة من عراقة نجد وتصلك معبأة بعناية لتلبي احتياجات الأفراد والعائلات والقطاعات التجارية في مختلف أنحاء المملكة.</p>
+              <div class="cta-row">
+                <a href="#contact" class="btn-stamp">اطلب الآن</a>
+                <a href="#products" class="btn-outline">شوف المنتجات</a>
+              </div>
+              <div class="badge-demo">موقع تجريبي مبدئي — بدون دفع إلكتروني حاليًا</div>
+            </div>
+
+            <svg class="building-art" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#12343B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="10,90 10,230 470,230 470,90"/>
+              <polyline points="10,90 30,60 50,90 70,60 90,90 110,60 130,90 150,60 170,90 190,60 210,90 230,60 250,90 270,60 290,90 310,60 330,90 350,60 370,90 390,60 410,90 430,60 450,90 470,90"/>
+              <rect x="55" y="140" width="34" height="90" />
+              <rect x="120" y="150" width="26" height="80" />
+              <rect x="175" y="150" width="26" height="80" />
+              <rect x="290" y="150" width="26" height="80" />
+              <rect x="345" y="150" width="26" height="80" />
+              <rect x="400" y="140" width="34" height="90" />
+              <path d="M225 230 L225 175 Q225 155 245 155 Q265 155 265 175 L265 230" />
+              <line x1="10" y1="230" x2="470" y2="230" stroke-width="4"/>
+              <line x1="60" y1="165" x2="80" y2="165"/>
+              <line x1="180" y1="175" x2="196" y2="175"/>
+              <line x1="295" y1="175" x2="311" y2="175"/>
+            </svg>
+          </div>
+        </div>
+        <div class="band flip"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap">
+      <div class="item"><span class="ico">💧</span> تعبئة نظيفة ومحكمة</div>
+      <div class="item"><span class="ico">🚚</span> توصيل بنفس اليوم</div>
+      <div class="item"><span class="ico">🌿</span> فحص جودة دوري</div>
+      <div class="item"><span class="ico">🏺</span> نكهة أصيلة، من غير إضافات</div>
+    </div>
+  </div>
+
+  <section id="heritage" class="heritage">
+    <div class="wrap">
+      <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#12343B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20,100 20,230 380,230 380,100"/>
+        <polyline points="20,100 45,65 70,100 95,65 120,100 145,65 170,100 195,65 220,100 245,65 270,100 295,65 320,100 345,65 380,100"/>
+        <rect x="60" y="150" width="40" height="80"/>
+        <rect x="150" y="160" width="28" height="70"/>
+        <rect x="230" y="160" width="28" height="70"/>
+        <path d="M290 230 L290 170 Q290 150 312 150 Q334 150 334 170 L334 230"/>
+        <line x1="20" y1="230" x2="380" y2="230" stroke-width="4"/>
+      </svg>
+      <div>
+        <div class="sec-head" style="margin-bottom:0;">
+          <div class="eyebrow">قصتنا</div>
+          <h2>من قلب نجد، إلى بيتك</h2>
+          <p>اسم "فيافي" مستوحى من الفياف والبيوت الطينية العريقة اللي شهدت أجيال تحرص على نقاء مصادر مياهها. اليوم نجمع بين تلك العراقة وتقنيات التعبئة الحديثة، عشان توصلك مياه نظيفة بطعم تثق فيه، بأسلوب يوصّل لك ويحترم وقتك.</p>
+          <p>في مصنعنا نعمل بشغف لتوفير مياه عالية الجودة تجمع بين النقاء والسلامة والطعم المميز، بالاعتماد على خطوط إنتاج حديثة وأنظمة رقابة دقيقة في جميع مراحل الإنتاج — من المعالجة وحتى التعبئة والتوزيع.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--cream); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">ما الذي يميز فيافي</div>
+        <h2>جودة تُبنى على تفاصيل دقيقة</h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card"><div class="ico">💎</div><h3>جودة معتمدة</h3><p>نطبّق أعلى معايير الجودة والرقابة لضمان سلامة المنتج.</p></div>
+        <div class="feat-card"><div class="ico">⚙️</div><h3>تقنيات حديثة</h3><p>خطوط إنتاج متطورة تضمن الكفاءة والحفاظ على جودة المياه.</p></div>
+        <div class="feat-card"><div class="ico">🚚</div><h3>توزيع موثوق</h3><p>شبكة توزيع فعّالة تضمن وصول المنتجات في الوقت المناسب.</p></div>
+        <div class="feat-card"><div class="ico">🌿</div><h3>التزام بالاستدامة</h3><p>نعمل على تحسين كفاءة العمليات وتقليل الأثر البيئي.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">أساسنا المؤسسي</div>
+        <h2>الرؤية والرسالة والقيم</h2>
+      </div>
+      <div class="vmv-grid">
+        <div class="vmv-card">
+          <h3>رؤيتنا</h3>
+          <p>أن نكون من أبرز مصانع المياه في المملكة العربية السعودية من خلال تقديم منتجات موثوقة وخدمة متميزة تلبي تطلعات عملائنا.</p>
+        </div>
+        <div class="vmv-card">
+          <h3>رسالتنا</h3>
+          <p>توفير مياه شرب نقية وآمنة وفق أعلى المعايير العالمية، مع التركيز على الجودة والابتكار والاستدامة.</p>
+        </div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">الجودة</span>
+        <span class="pill alt">الموثوقية</span>
+        <span class="pill">الشفافية</span>
+        <span class="pill alt">الابتكار</span>
+        <span class="pill">المسؤولية</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">منتجاتنا</div>
+        <h2>اختر الحجم المناسب لك</h2>
+        <p>أسعار مبدئية للعرض التوضيحي، عدّلها لاحقًا حسب مورّدك وتكلفتك الفعلية.</p>
+      </div>
+      <div class="products">
+        <div class="pcard">
+          <span class="tag">الأكثر طلبًا</span>
+          <div class="size">٤ لترات</div>
+          <div class="name">قارورة عائلية</div>
+          <div class="desc">مناسبة للاستخدام اليومي في المطبخ ومكاتب صغيرة.</div>
+          <div class="price">٦ ريال</div>
+        </div>
+        <div class="pcard">
+          <div class="size">١٩ لتر</div>
+          <div class="name">قارورة الدبة الكبيرة</div>
+          <div class="desc">تركب على البرادة مباشرة، تكفي الأسرة لعدة أيام.</div>
+          <div class="price">١٢ ريال</div>
+        </div>
+        <div class="pcard">
+          <div class="size">كرتون ٦×٦٠٠مل</div>
+          <div class="name">عبوات فردية</div>
+          <div class="desc">مثالية للسفر والرياضة والاستخدام خارج المنزل.</div>
+          <div class="price">١٥ ريال</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--cream); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">شركاؤنا وعملاؤنا</div>
+        <h2>حلول توريد لمختلف القطاعات</h2>
+        <p>إلى جانب التوصيل المنزلي، نوفر حلول توريد مرنة تدعم استمرارية الأعمال والفعاليات.</p>
+      </div>
+      <div class="products" style="margin-bottom:34px;">
+        <div class="pcard">
+          <div class="name">توريد للمكاتب والشركات</div>
+          <div class="desc">جدولة توريد منتظمة تناسب استهلاك فريقك اليومي.</div>
+        </div>
+        <div class="pcard">
+          <div class="name">توريد للمطاعم والمقاهي</div>
+          <div class="desc">كميات ثابتة بجودة موثوقة تدعم تشغيلكم اليومي.</div>
+        </div>
+        <div class="pcard">
+          <div class="name">توريد للفعاليات والمناسبات</div>
+          <div class="desc">تغطية فورية للمناسبات بكميات مرنة حسب الحاجة.</div>
+        </div>
+      </div>
+      <div class="sector-row">
+        <span class="sector-pill">الأفراد</span>
+        <span class="sector-pill">العائلات</span>
+        <span class="sector-pill">الشركات</span>
+        <span class="sector-pill">المكاتب</span>
+        <span class="sector-pill">المطاعم والمقاهي</span>
+        <span class="sector-pill">الجهات الحكومية والخاصة</span>
+        <span class="sector-pill">الفعاليات والمناسبات</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="background:var(--cream); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">اطلب بسهولة</div>
+        <h2>كيف تطلب من فيافي</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">١</div><h3>تواصل معنا</h3><p>اتصل أو راسلنا على الواتساب بالكمية اللي تحتاجها.</p></div>
+        <div class="step"><div class="n">٢</div><h3>حدد عنوانك</h3><p>زوّدنا بموقعك وأقرب وقت مناسب للتوصيل.</p></div>
+        <div class="step"><div class="n">٣</div><h3>الدفع عند الاستلام</h3><p>تدفع نقدًا أو بالشبكة عند وصول المندوب.</p></div>
+        <div class="step"><div class="n">٤</div><h3>استمتع بمائك</h3><p>قارورتك تصلك نظيفة ومختومة وجاهزة للاستخدام.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">آراء عملائنا</div>
+        <h2>ليش الناس ترجع تطلب من فيافي</h2>
+      </div>
+      <div class="testi-wrap">
+        <div class="testi"><p class="quote">"طعم الماء فرق واضح، وصار توصيل الدبة أسبوعي منتظم ما أشيل هم."</p><div class="who">— أم سعود</div></div>
+        <div class="testi"><p class="quote">"سرعة التوصيل شيء يشد الانتباه، أطلب الصبح وتوصلني الظهر."</p><div class="who">— فهد العتيبي</div></div>
+        <div class="testi"><p class="quote">"التغليف يعطي إحساس فخامة وأصالة، حتى الضيوف يسألون عن الماركة."</p><div class="who">— نورة القحطاني</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:0;">
+    <div class="wrap">
+      <div class="cta-banner">
+        <h3>هل تبحث عن شريك توريد يعتمد عليه؟</h3>
+        <p>تقدم فيافي حلول مياه احترافية بجودة مستقرة وهوية موثوقة تدعم احتياجات الأفراد والعائلات والقطاعات التجارية.</p>
+        <a href="#contact">ابدأ طلب التوريد</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:60px;">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <h2>تواصل معنا الآن</h2>
+          <p>فريقنا جاهز يستقبل طلبك أو استفسارك في أي وقت خلال أوقات العمل.</p>
+          <div class="badge-demo" style="border-color:var(--cream); color:var(--cream);">بيانات التواصل أدناه مؤقتة لغرض العرض — عدّلها بأرقامكم الفعلية</div>
+        </div>
+        <div class="contact-list">
+          <a class="contact-row" href="tel:+966500000000">
+            <div class="ico">📞</div>
+            <div><div class="lbl">اتصل بنا</div><div class="val">٩٦٦٥٠٠٠٠٠٠٠٠+</div></div>
+          </a>
+          <a class="contact-row" href="https://wa.me/966500000000">
+            <div class="ico">💬</div>
+            <div><div class="lbl">واتساب</div><div class="val">٩٦٦٥٠٠٠٠٠٠٠٠+</div></div>
+          </a>
+          <a class="contact-row" href="mailto:info@fayafi-water.com">
+            <div class="ico">✉️</div>
+            <div><div class="lbl">البريد الإلكتروني</div><div class="val">info@fayafi-water.com</div></div>
+          </a>
+          <div class="contact-row" style="cursor:default;">
+            <div class="ico">📍</div>
+            <div><div class="lbl">التغطية</div><div class="val">الرياض وضواحيها</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© ٢٠٢٦ فيافي للمياه — موقع تجريبي مبدئي للعرض فقط.</div>
+</footer>
+
+</body>
+</html>
